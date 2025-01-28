@@ -1,16 +1,14 @@
 const express = require("express");
 const app = express();
+const { dbConnect } = require("./config/database");
+dbConnect()
+  .then(() => {
+    console.log("Database successfully connected");
+    app.listen(3000, () => {
+      console.log("Server running successfully");
+    });
+  })
 
-app.get("/user", (req, res) => {
-  console.log(req.query);
-  res.send("Successful");
-});
-app.get("/test/:userId/:password", (req, res) => {
-  //data saved to db
-  console.log(req.params);
-  res.send("Hello");
-});
-
-app.listen(3000, () => {
-  console.log("Server running successfully");
-});
+  .catch((err) => {
+    console.log("Some error occured in the connection");
+  });
