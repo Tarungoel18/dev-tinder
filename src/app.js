@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
 
-app.use("/test", (req, res) => {
-  res.send("Welcome to test");
+app.get("/user", (req, res) => {
+  console.log(req.query);
+  res.send("Successful");
 });
-app.use((req, res) => {
+app.get("/test/:userId/:password", (req, res) => {
+  //data saved to db
+  console.log(req.params);
   res.send("Hello");
 });
 
